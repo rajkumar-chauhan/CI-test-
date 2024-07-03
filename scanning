@@ -4,8 +4,8 @@ provider "aws" {
 
 provider "aws" {
   region     = "us-west-2"
-  access_key = "AKIATCKAQURMGDWFSIEI"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 resource "aws_instance" "web" {
