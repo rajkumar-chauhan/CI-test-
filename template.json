@@ -1,0 +1,33 @@
+{
+  "variables": {
+    "aws_region": "us-east-1"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `aws_region`}}",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "amzn2-ami-hvm-*-x86_64-gp2",
+          "root-device-type": "ebs"
+        },
+        "most_recent": true,
+        "owners": ["137112412989"]
+      },
+      "ami_name": "My-AMI-{{timestamp}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y",
+        "sudo yum install -y httpd",
+        "sudo systemctl enable httpd"
+      ]
+    }
+  ]
+}
